@@ -32,18 +32,16 @@ class NegociacaoController {
 	importaNegociacoes() {
 
 		let service = new NegociacaoService();
-
-		service.obterNegociacoesDaSemana((err, negociacoes) => {
-
-			if(err) {
-				this._mensagem.texto = err;
-				return;
-			}
-
-			negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
-
-			this._mensagem.texto = 'Negociações Importadas com sucesso';
-		});
+        
+        service
+        	.obterNegociacoes()
+        	.then(negociacoes => {
+	          
+	          negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+	          
+	          this._mensagem.texto = 'Negociações do período importadas com sucesso';
+        	})
+        	.catch(error => this._mensagem.texto = error);	
 	}
 
 	esvazia(){
@@ -70,9 +68,5 @@ class NegociacaoController {
 		this._inputData.value = '';
 
 		this._inputData.focus()
-	}
-
-	exportar() {
-
 	}
 }
