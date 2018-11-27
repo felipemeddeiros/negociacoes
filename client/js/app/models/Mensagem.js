@@ -2,6 +2,7 @@ class Mensagem {
 
 	constructor(texto='') {
 
+		// this._texto = texto || ''; // se texto for undefined, vai passar ''
 		this._texto = texto;
 	}
 
