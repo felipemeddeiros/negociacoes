@@ -10,15 +10,30 @@ class Negociacao {
 	}
 
 	get data(){
+		
 		return new Date(this._data.getTime());
 	}
+
 	get quantidade(){
+
 		return this._quantidade;
 	}
+
 	get valor(){
+
 		return this._valor;
 	}
+
 	get volume(){
+
 		return this._quantidade * this._valor;
 	}
+
+	isEquals(outraNegociacao) {    
+
+		return this._data.getTime() == outraNegociacao.data.getTime()
+            && this._valor == outraNegociacao.valor;
+
+        // return JSON.stringify(this) == JSON.stringify(outraNegociacao)
+    }
 }
