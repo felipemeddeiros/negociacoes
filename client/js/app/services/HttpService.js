@@ -1,55 +1,73 @@
 class HttpService 
 {
+
+	_handleErrors(res) {
+
+	    if(!res.ok) throw new Error(res.statusText);
+	    return res;
+	}
+
 	get(url) {
 
-		return new Promise((resolve, reject) => {
+		return fetch(url)
+            .then(res => this._handleErrors(res))
+            .then(res => res.json());
+            
+		// return new Promise((resolve, reject) => {
 
-			let xhr = new XMLHttpRequest();
+		// 	let xhr = new XMLHttpRequest();
 
-			xhr.open('GET', url);
+		// 	xhr.open('GET', url);
 
-			xhr.onreadystatechange = () => {
+		// 	xhr.onreadystatechange = () => {
 				
-				if(xhr.readyState == 4) {
+		// 		if(xhr.readyState == 4) {
 
-					if(xhr.status == 200) {
+		// 			if(xhr.status == 200) {
 
-						resolve(JSON.parse(xhr.responseText));
+		// 				resolve(JSON.parse(xhr.responseText));
 					
-					} else {
+		// 			} else {
 
-						reject(xhr.responseText);
-					}
-				}
-			}
+		// 				reject(xhr.responseText);
+		// 			}
+		// 		}
+		// 	}
 
-			xhr.send();
-		});
+		// 	xhr.send();
+		// });
 	}
 
 	post(url, dado) {
 
-        return new Promise((resolve, reject) => {
+		return fetch(url, {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'post',
+            body: JSON.stringify(dado)
+        })
+        .then(res => this._handleErrors(res));
 
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", url, true);
-            xhr.setRequestHeader("Content-type", "application/json");
-            xhr.onreadystatechange = () => {
+        // return new Promise((resolve, reject) => {
 
-                if (xhr.readyState == 4) {
+        //     let xhr = new XMLHttpRequest();
+        //     xhr.open("POST", url, true);
+        //     xhr.setRequestHeader("Content-type", "application/json");
+        //     xhr.onreadystatechange = () => {
 
-                    if (xhr.status == 200) {
+        //         if (xhr.readyState == 4) {
 
-                        resolve(JSON.parse(xhr.responseText));
+        //             if (xhr.status == 200) {
+
+        //                 resolve(JSON.parse(xhr.responseText));
             
-                    } else {
+        //             } else {
 
-                        reject(xhr.responseText);
-                    }
-                }
-            };
+        //                 reject(xhr.responseText);
+        //             }
+        //         }
+        //     };
 
-            xhr.send(JSON.stringify(dado)); // usando JSON.stringify para converter objeto em uma string no formato JSON.
-        });
+        //     xhr.send(JSON.stringify(dado)); // usando JSON.stringify para converter objeto em uma string no formato JSON.
+        // });
     }
 }
