@@ -1,17 +1,63 @@
-class View {
+'use strict';
 
-	constructor(elemento) {
+System.register([], function (_export, _context) {
+	"use strict";
 
-		this._elemento = elemento;
+	var _createClass, View;
+
+	function _classCallCheck(instance, Constructor) {
+		if (!(instance instanceof Constructor)) {
+			throw new TypeError("Cannot call a class as a function");
+		}
 	}
 
-	template() {
+	return {
+		setters: [],
+		execute: function () {
+			_createClass = function () {
+				function defineProperties(target, props) {
+					for (var i = 0; i < props.length; i++) {
+						var descriptor = props[i];
+						descriptor.enumerable = descriptor.enumerable || false;
+						descriptor.configurable = true;
+						if ("value" in descriptor) descriptor.writable = true;
+						Object.defineProperty(target, descriptor.key, descriptor);
+					}
+				}
 
-		throw new Erro('O método template deve ser implementado')
-	}
+				return function (Constructor, protoProps, staticProps) {
+					if (protoProps) defineProperties(Constructor.prototype, protoProps);
+					if (staticProps) defineProperties(Constructor, staticProps);
+					return Constructor;
+				};
+			}();
 
-	update(model) {
+			_export('View', View = function () {
+				function View(elemento) {
+					_classCallCheck(this, View);
 
-		this._elemento.innerHTML = this.template(model);
-	}
-}
+					this._elemento = elemento;
+				}
+
+				_createClass(View, [{
+					key: 'template',
+					value: function template() {
+
+						throw new Erro('O método template deve ser implementado');
+					}
+				}, {
+					key: 'update',
+					value: function update(model) {
+
+						this._elemento.innerHTML = this.template(model);
+					}
+				}]);
+
+				return View;
+			}());
+
+			_export('View', View);
+		}
+	};
+});
+//# sourceMappingURL=View.js.map
